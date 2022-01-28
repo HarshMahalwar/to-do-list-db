@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class = "container my-4">
+    <form method="post" action = "#">
+    {% csrf_token %}
+    <p>Are you sure you want to remove "{{task}}" from the list?</p>
+    <a href = "/" class = "btn btn-outline-danger">Go back</a>
+    <input type="submit" class = "btn btn-outline-danger" value = "confirm"/>
+</form>
+</div>
+
+{% endblock content %}
+

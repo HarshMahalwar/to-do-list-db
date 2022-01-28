@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+{% if request.user.is_authenticated %}
+
+{% for task in tasks %}
+{% if request.user == task.host %}
+<div class = "container my-4">
+  <div class="card">
+  <div class="card-body">
+
+    <h5 class="card-title">{{task.task}}</h5>
+    <p class="card-text">{{task.desc}} </p>
+      <hr>
+      <p class="card-text">Added on: {{task.created}} by <b>{{task.host.username}}</b></p>
+    <a href="delete/{{task.id}}" class="btn btn-outline-danger">Mark as done</a>
+    <a href ="update/{{task.id}}" class="btn btn-outline-danger">Edit task</a>
+
+  </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+{% else %}
+<div class = 'container my-4'>
+  <div class="jumbotron">
+  <h1 class="display-4">Hello there!</h1>
+  <p class="lead">This webapp will help you out by sorting out your day to day tasks.</p>
+  <hr class="my-4">
+  <p>You will have to register or sign up in order to use this webapp.</p>
+  <p class="lead">
+    <a class="btn btn-danger btn-lg" href="{% url 'login' %}" role="button">Click here to get started</a>
+  </p>
+</div>
+</div>
+{% endif %}
+{% endblock content %}
